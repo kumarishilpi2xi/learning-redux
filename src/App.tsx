@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import * as action from './action/action';
 import './App.css';
+import { RouteComponentProps } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface MyProps{
+  loading:boolean;
+  error: string;
+  url: string;
+  dispatch: (fun:any) => void
 }
+
+interface MyState{
+  loading:true,
+  error:'',
+  url:''
+}
+class App extends Component<MyProps, MyState>{
+  static defaultProps = {dispatch : undefined};
+
+  render () {
+    return (
+      <div>
+        <button onClick={() => this.props.dispatch(action.fetchDog())}>Show Dog</button>
+          {this.props.loading 
+            ? <p>Loading...</p> 
+            : this.props.error
+                ? <p>Error, try again</p>
+                : <p><img src={this.props.url} alt='dog'/></p>}
+      </div>
+    )
+  }
+}
+
+
+
+
+const ConnectedApp = connect((state) => {
+  console.log(state);
+  return state;
+})(App);
 
 export default App;
