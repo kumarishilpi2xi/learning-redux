@@ -8,7 +8,7 @@ interface MyProps{
   loading:boolean;
   error: string;
   url: string;
-  dispatch: (fun:any) => void
+
 }
 
 interface MyState{
@@ -17,7 +17,7 @@ interface MyState{
   url:''
 }
 class App extends Component<MyProps, MyState>{
-  static defaultProps = {dispatch : undefined};
+  
 
   render () {
     return (
