@@ -5,9 +5,10 @@ import './App.css';
 import { RouteComponentProps } from 'react-router-dom';
 
 interface MyProps{
-  loading:boolean;
-  error: string;
-  url: string;
+  loading?:boolean;
+  error?: string;
+  url?: string;
+  fetchDog?: any;
 
 }
 
@@ -17,12 +18,10 @@ interface MyState{
   url:''
 }
 class App extends Component<MyProps, MyState>{
-  
-
   render () {
     return (
       <div>
-        <button onClick={() => this.props.dispatch(action.fetchDog())}>Show Dog</button>
+        <button onClick={() => this.props.fetchDog}>Show Dog</button>
           {this.props.loading 
             ? <p>Loading...</p> 
             : this.props.error
@@ -34,11 +33,21 @@ class App extends Component<MyProps, MyState>{
 }
 
 
+// const mapStateToProps : (state: object) => ({
+//   todos: getVisibleTodos(state.todos, state.visibilityFilter)
+// })
+
+const mapDispatchToProps = (dispatch: any) => ({
+  fetchDog: dispatch(action.fetchDog())
+})
+
+
+
 
 
 const ConnectedApp = connect((state) => {
   console.log(state);
   return state;
-})(App);
+},mapDispatchToProps)(App);
 
 export default App;
