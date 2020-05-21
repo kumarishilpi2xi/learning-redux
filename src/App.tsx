@@ -34,7 +34,7 @@ class App extends Component<MyProps, MyState>{
 
 
 // const mapStateToProps : (state: object) => ({
-//   todos: getVisibleTodos(state.todos, state.visibilityFilter)
+//  
 // })
 
 const mapDispatchToProps = (dispatch: any) => ({
